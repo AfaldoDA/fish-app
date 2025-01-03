@@ -3,23 +3,43 @@ import pickle
 import numpy as np
 
 # Fungsi untuk memuat model, encoder, dan scaler
-def load_model_and_preprocessors(model_name):
-    if model_name == "Stochastic Gradient Descent (SGD)":
-        model = pickle.load(open("sgd_model.pkl", "rb"))
-        encoder = pickle.load(open("enc.pkl", "rb"))
-        scaler = pickle.load(open("sc.pkl", "rb"))
-    elif model_name == "Perceptron":
-        model = pickle.load(open("ppn_model.pkl", "rb"))
-        encoder = pickle.load(open("enc_ppn.pkl", "rb"))
-        scaler = pickle.load(open("sc_ppn.pkl", "rb"))
+# def load_model_and_preprocessors(model_name):
+#     if model_name == "Stochastic Gradient Descent (SGD)":
+#         model = pickle.load(open("sgd_model.pkl", "rb"))
+#         encoder = pickle.load(open("enc.pkl", "rb"))
+#         scaler = pickle.load(open("sc.pkl", "rb"))
+#     elif model_name == "Perceptron":
+#         model = pickle.load(open("ppn_model.pkl", "rb"))
+#         encoder = pickle.load(open("enc_ppn.pkl", "rb"))
+#         scaler = pickle.load(open("sc_ppn.pkl", "rb"))
 
-    elif model_name == "Support Vector Machine (SVM)":
-        model = pickle.load(open("svm.pkl", "rb"))
-        encoder = pickle.load(open("svm_enc.pkl", "rb"))
-        scaler = pickle.load(open("evm_sc.pkl", "rb"))
-    else:
-        raise ValueError("Model tidak ditemukan!")
-    return model, encoder, scaler
+#     elif model_name == "Support Vector Machine (SVM)":
+#         model = pickle.load(open("svm.pkl", "rb"))
+#         encoder = pickle.load(open("svm_enc.pkl", "rb"))
+#         scaler = pickle.load(open("svm_sc.pkl", "rb"))
+#     else:
+#         raise ValueError("Model tidak ditemukan!")
+#     return model, encoder, scaler
+def load_model_and_preprocessors(model_name):
+    try:
+        if model_name == "Stochastic Gradient Descent (SGD)":
+            model = pickle.load(open("sgd_model.pkl", "rb"))
+            encoder = pickle.load(open("enc.pkl", "rb"))
+            scaler = pickle.load(open("sc.pkl", "rb"))
+        elif model_name == "Perceptron":
+            model = pickle.load(open("ppn_model.pkl", "rb"))
+            encoder = pickle.load(open("enc_ppn.pkl", "rb"))
+            scaler = pickle.load(open("sc_ppn.pkl", "rb"))
+        elif model_name == "Support Vector Machine (SVM)":
+            model = pickle.load(open("svm.pkl", "rb"))
+            encoder = pickle.load(open("svm_enc.pkl", "rb"))
+            scaler = pickle.load(open("svm_sc.pkl", "rb"))
+        else:
+            raise ValueError("Model tidak ditemukan!")
+        return model, encoder, scaler
+    except Exception as e:
+        st.error(f"Error loading model/preprocessors: {e}")
+        raise e
 
 # Judul aplikasi
 st.title("Prediksi Jenis Ikanmu Disini :)")
